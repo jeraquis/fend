@@ -1,4 +1,5 @@
-function sdkGet(input) {
+export function sdkGet(input) {
+    console.log(input)
     let AYLIENTextAPI = require('aylien_textapi');
     let textapi = new AYLIENTextAPI({
       application_id: process.env.API_ID,
@@ -6,13 +7,15 @@ function sdkGet(input) {
     });
 
     const get = textapi.hashtags({
-        'url': input
+        url: input
         }, function(error, response) {
         if (error === null) {
-            console.log(response);
+            console.log(response.hashtags);
         }
     });
+
     console.log(get)
     return get
 
 }
+

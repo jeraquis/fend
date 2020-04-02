@@ -5,7 +5,7 @@ var path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-var aylien = require("aylien_textapi")
+var aylien = require('aylien_textapi')
 
 var textapi = new aylien({
     application_id: process.env.API_ID,
@@ -35,11 +35,11 @@ app.get('/api', function (req, res) {
     textapi.hashtags({
         url: req
         }, function(error, response) {
-            if (error === null) {
-                console.log(response.hashtags);
-                res.send(response.hashtags)
-            }
-    });
+        if (error === null) {
+            console.log(response.hashtags)
+            res.send(response.hashtags)
+        }
+    })
 })
 
 /*
