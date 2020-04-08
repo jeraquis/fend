@@ -1,3 +1,4 @@
+
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -31,16 +32,24 @@ app.listen(8001, function () {
     console.log('Example app listening on port 8001!')
 })
 
-app.get('/api', function (req, res) {
-    textapi.hashtags({
-        url: req
+app.post('/api', async (req, res) => {
+    console.log('posting')
+    try {
+        textapi.hashtags({
+            url: req
         }, function(error, response) {
-        if (error === null) {
-            console.log(response.hashtags)
-            res.send(response.hashtags)
-        }
-    })
-})
+            if (error === null) {
+                console.log('worked')
+                res.send(response)
+            }
+        })
+    } 
+    catch(error) {
+        console.log('error', error)
+    }
+})        
+
+
 
 /*
 textapi.hashtags({

@@ -1,4 +1,7 @@
-export function sdkGet(input) {
+export async function sdkGet(formText) {
+
+
+    const func = async (input)
     console.log(input)
     let AYLIENTextAPI = require('aylien_textapi');
     let textapi = new AYLIENTextAPI({

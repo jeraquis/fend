@@ -1,42 +1,50 @@
-
-import { sdkGet } from '../../server/sdkAPI'
 import { printUI } from './updateUI'
 
-function handleSubmit(event) {
+async function handleSubmit(event, data = {}) {
     event.preventDefault()
     let formText = document.getElementById('url').value
-    getData(formText)
-    .then(function() {
-        printUI(data)
+    console.log(formText)
+    
+    const response = await fetch(`http://localhost:8001/api?input=${formText}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     })
+
+
+    console.log(response)
+//    .then(response => response.json)
+//    .then(console.log(response))
+
+//    getData(formText)
+//    .then(function )
+    .then(printUI())
 }
 
-const getData = async (formText) => {
+const getData = async (formText, data = {}) => {
     console.log('getData')
-    const res = await fetch(`http://localhost:8001/api?input=${formText}`)
-    console.log(res)
-    console.log('after')
+    fetch(`http://localhost:8001/api?input=${formText}`, {
+
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(function(){
+        console.log('after')
+    })
     try { const data = await res.json()
         console.log(data)
-        return data
     } catch(error) {
         console.log('error', error)
     }
 }
-/*
-    const getData = async () => {
-        const res = sdkGet(formText)
-        const data = JSON.stringify(res)
-        console.log(res)
-        console.log(data)
-        return data
-    }
 
-    const info = getData()
-    .then(function(){
-        printUI(info)
-    })
-    
-}
-*/
+
+
 export { handleSubmit }

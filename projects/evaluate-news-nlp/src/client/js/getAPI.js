@@ -1,9 +1,6 @@
 
 function getInfo(input) {
-    const baseURL = 'https://api.aylien.com/api/v1/hashtags?language=en&input='
     console.log(input)
-    const request = ``
-    console.log(request)
 /*
     const getting = async (url = '', data = {}) => {
         console.log('in getting')
@@ -27,13 +24,13 @@ function getInfo(input) {
     }
     const boop = getting()
     console.log(boop)
-/*
+ */
     var aylien = require("aylien_textapi")
     var textapi = new aylien({
         application_id: process.env.API_ID,
         application_key: process.env.API_KEY
     })
-    const test = textapi.hashtags({
+    textapi.hashtags({
         url: input
     }, function(error,response) {
         if (error === null) {
@@ -42,7 +39,7 @@ function getInfo(input) {
     })
     
     console.log(test)
-    */
+    
 }
 
 /* API SDK
