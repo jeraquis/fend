@@ -33,7 +33,7 @@ app.listen(8001, function () {
 })
 
 app.post('/api', async (req, res) => {
-    console.log('posting')
+    console.log(process.env.API_ID)
     try {
         textapi.hashtags({
             url: req
