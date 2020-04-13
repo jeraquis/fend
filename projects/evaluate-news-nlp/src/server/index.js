@@ -11,7 +11,9 @@ var aylien = require('aylien_textapi')
 var textapi = new aylien({
     application_id: process.env.API_ID,
     application_key: process.env.API_KEY
-    });
+});
+
+let data ={}
 
 const app = express()
 
@@ -32,12 +34,16 @@ app.listen(8001, function () {
     console.log('Example app listening on port 8001!')
 })
 
+/*
 app.post('/api', async (req, res) => {
     console.log(process.env.API_ID)
+    console.log(process.env.API_KEY)
+    console.log(req.body)
     try {
         textapi.hashtags({
             url: req
         }, function(error, response) {
+            console.log("error is - " + error)
             if (error === null) {
                 console.log('worked')
                 res.send(response)
@@ -48,8 +54,31 @@ app.post('/api', async (req, res) => {
         console.log('error', error)
     }
 })        
+*/
 
+app.get('/api', function(req, res) {
+    console.log(process.env.API_ID)
+    console.log(process.env.API_KEY)
+    console.log(req.body)
+    console.log(data)
 
+    textapi.hashtags({
+        url: data
+    }, function(error, response) {
+        console.log("error is - " + error)
+        if (error === null) {
+            console.log('worked')
+            res.send(response)
+        }
+    })
+})
+
+app.post('/tags', function(req,res) {
+    console.log(req)
+    data = req
+    console.log(data)
+    res.send('posted')
+})
 
 /*
 textapi.hashtags({
