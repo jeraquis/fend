@@ -59,25 +59,23 @@ app.post('/api', async (req, res) => {
 app.get('/api', function(req, res) {
     console.log(process.env.API_ID)
     console.log(process.env.API_KEY)
-    console.log(req.body)
-    console.log(data)
+    console.log(data.data)
 
     textapi.hashtags({
-        url: data
+        url: data.data
     }, function(error, response) {
         console.log("error is - " + error)
         if (error === null) {
-            console.log('worked')
+            console.log(response)
             res.send(response)
         }
     })
 })
 
 app.post('/tags', function(req,res) {
-    console.log(req)
-    data = req
+    data = req.body
     console.log(data)
-    res.send('posted')
+    res.send({ str: 'posted' })
 })
 
 /*

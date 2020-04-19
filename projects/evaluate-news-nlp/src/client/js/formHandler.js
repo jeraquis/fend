@@ -6,14 +6,14 @@ async function handleSubmit(event) {
     console.log(formText)
 
     sendData('http://localhost:8001/tags', formText)
-    .then((resp) => resp.json())
     .then(() => {
-        getData('http://localhost:8001/api')
+        const response = getData('http://localhost:8001/api')
+        console.log(response)
     })
     .then((response) => {
+        console.log(response)
         printUI(response)
     })
-
 }
 
 const sendData = async (url, data) => {
@@ -25,7 +25,7 @@ const sendData = async (url, data) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ data })
     })
 
     try { 
@@ -37,7 +37,9 @@ const sendData = async (url, data) => {
 }
 
 const getData = async () => {
+    console.log('getData')
     const hashtags = await fetch('http://localhost:8001/api')
+    console.log(hashtags)
 
     try { 
         const data = hashtags.json()
